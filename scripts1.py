@@ -6,30 +6,52 @@ import configparser
 config = configparser.ConfigParser()
 config.read('bynder.ini')
 
-base_url=config.get('BYNDER_TOKENS', 'base_url'),
-consumer_key=config.get('BYNDER_TOKENS', 'consumer_key'),
-consumer_secret=config.get('BYNDER_TOKENS', 'consumer_secret'),
-token=config.get('BYNDER_TOKENS', 'token'),
-token_secret=config.get('BYNDER_TOKENS', 'token_secret')
+bynder_base_url=config.get('BYNDER_TOKENS', 'base_url'),
+bynder_consumer_key=config.get('BYNDER_TOKENS', 'consumer_key'),
+bynder_consumer_secret=config.get('BYNDER_TOKENS', 'consumer_secret'),
+bynder_token=config.get('BYNDER_TOKENS', 'token'),
+bynder_token_secret=config.get('BYNDER_TOKENS', 'token_secret')
 
 bynder_client = BynderClient(
-    base_url=base_url,
-    consumer_key=consumer_key,
-    consumer_secret=consumer_secret,
-    token=token,
-    token_secret=token_secret
+    base_url=config.get('BYNDER_TOKENS', 'base_url'),
+    consumer_key=config.get('BYNDER_TOKENS', 'consumer_key'),
+    consumer_secret=config.get('BYNDER_TOKENS', 'consumer_secret'),
+    token=config.get('BYNDER_TOKENS', 'token'),
+    token_secret=config.get('BYNDER_TOKENS', 'token_secret')
 )
 
+
+# Get the asset bank client
 asset_bank_client = bynder_client.asset_bank_client
 
+
+# Get the collections client
+collection_client = bynder_client.collection_client
+
+
+# Get brands
+# brands = asset_bank_client.brands()
+# print(brands)
+
+# Get tags
+# tags = asset_bank_client.tags()
+# print(tags)
+
+
+
+
+
+
+asset_bank_client = bynder_client.asset_bank_client
+# import ipdb; ipdb.set_trace()
 media_list = asset_bank_client.media_list()
 print(media_list)
 
-media_list = asset_service.media_list({
-        'limit': 2,
-        'type': 'image'
-    })
-print(media_list)
+# media_list = asset_service.media_list({
+#         'limit': 2,
+#         'type': 'image'
+#     })
+# print(media_list)
 
 """
 asset_bank_client:
